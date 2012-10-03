@@ -29,14 +29,34 @@ namespace ExempelRitaIFonster
 
         public void move()
         {
+            Random rand = new Random();
+            int a;
             if (map[centerY/20, centerX/20] == 2)
             {
-                bytRiktning(Riktning.höger);
+                if ((map[(centerY-20)/20, centerX/20] == 0 && map[centerY/20, (centerX-20)/20] == 0) ||
+                    (map[(centerY+20)/20, centerX/20] == 0 && map[centerY / 20, (centerX-20)/20] == 0) ||
+                    (map[centerY/20, (centerX+20)/20] == 0 && map[(centerY+20)/20, centerX/20]== 0) ||
+                    (map[(centerY-20)/20, centerX/20] == 0 && map[centerY/20, (centerX+20)/20] == 0))
+                {
+                    bytRiktning(Riktning.vänster);
+                }
+                if ((map[(centerY - 40) / 20, centerX / 20] == 0 && map[centerY / 20, (centerX + 40) / 20] == 0) ||
+                    (map[(centerY + 40) / 20, centerX / 20] == 0 && map[centerY / 20, (centerX + 40) / 20] == 0) ||
+                    (map[(centerY + 40) / 20, centerX / 20] == 0 && map[centerY / 20, (centerX - 40) / 20] == 0) || 
+                    (map[(centerY-40)/20, centerX/20] == 0 && map[centerY/20, (centerX-40)/20] == 0))
+                {
+                    bytRiktning(Riktning.höger);
+                }
+                if ((map[(centerY+20)/20, centerX/20]==2 && map[centerY, (centerX+20)/20] == 2))
+                {
+                    a = rand.Next(0, 1);
+                    if (a==1)
+                    {
+                        bytRiktning(Riktning.höger);
+                    }
+                }
             }
-            if (map[centerY/20, centerX/20] == 5)
-            {
-                bytRiktning(Riktning.vänster);
-            }
+            
             //öka på lämplig kordinat - baserat på bilens nuvarande riktning
             if (dir == Riktning.höger)
                 centerX += tileSize;
